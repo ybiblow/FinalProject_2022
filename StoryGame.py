@@ -8,7 +8,7 @@ class StoryGame:
         pass
 
     def showListOfStories(self):
-        self.list_of_stories = listdir('StoryGame/dataset')
+        self.list_of_stories = listdir('dataset')
         print("List of stories: ")
         for story in self.list_of_stories:
             print(story)

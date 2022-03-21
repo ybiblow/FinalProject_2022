@@ -1,13 +1,67 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="dd539b0d-6b88-466c-8f58-a9c9777e9c27" name="Changes" comment="" />
+    <list default="true" id="dd539b0d-6b88-466c-8f58-a9c9777e9c27" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/Final_Project.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Final_Project.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoryGame/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoryGame/.idea/StoryGame.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoryGame/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoryGame/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoryGame/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoryGame/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoryGame/StoryGame.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoryGame/dataset/1. A jataka tale.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoryGame/dataset/10. Haris luck.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoryGame/dataset/11. The brave girl.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoryGame/dataset/12. Four Poetesses.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoryGame/dataset/13. Life-giving Margosa.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoryGame/dataset/14. Womans Counsel.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoryGame/dataset/15. Imposter.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoryGame/dataset/16. The king maker.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoryGame/dataset/17. The Sworn mind.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoryGame/dataset/2. Who is the thief.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoryGame/dataset/3. Shiva and Madhava.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoryGame/dataset/4. the comet.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoryGame/dataset/5. Courage.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoryGame/dataset/6. Pravaras Wife.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoryGame/dataset/7.  Noblest creed.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoryGame/dataset/8. Chikka the robber.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoryGame/dataset/9. Family of Pandits.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoryGame/main.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoryGame/question_generator/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoryGame/question_generator/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoryGame/question_generator/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoryGame/question_generator/articles/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoryGame/question_generator/articles/indian_matchmaking.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoryGame/question_generator/articles/owl_rescue.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoryGame/question_generator/articles/relaxing_headset.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoryGame/question_generator/articles/tom_hanks.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoryGame/question_generator/articles/twitter_hack.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoryGame/question_generator/examples/qg_commandline_example.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoryGame/question_generator/examples/question_generation_example.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoryGame/question_generator/questiongenerator.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoryGame/question_generator/requirements.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoryGame/question_generator/run_qg.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoryGame/question_generator/training/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoryGame/question_generator/training/dataset.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoryGame/question_generator/training/qa_eval_train.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoryGame/question_generator/training/qg_train.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoryGame/question_generator/training/trainer.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoryGame/question_generator/training/utils.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/question_generation_example.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/question_generation_example.ipynb" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectId" id="26fUEEB1KXsd19B57bxPZBUZely" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -15,7 +69,58 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/StoryGame" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="RunManager" selected="Python.main">
+    <configuration name="StoryGame" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Final_Project" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/StoryGame.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Final_Project" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.main" />
+        <item itemvalue="Python.StoryGame" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">

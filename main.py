@@ -6,11 +6,10 @@ from StoryGame import StoryGame
 
 print(sys.executable)
 print('hello world!')
-print(listdir("storygame/dataset"))
-#sorted(listdir('StoryGame/dataset'))
-# sg = StoryGame()
-# sg.showListOfStories()
-# sg.chooseStory()
+
+sg = StoryGame()
+sg.showListOfStories()
+sg.chooseStory()
 
 # start = time.time()
 # sg.generateQuestions()
