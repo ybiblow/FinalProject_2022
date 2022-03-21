@@ -8,8 +8,9 @@ print(sys.executable)
 print('hello world!')
 
 sg = StoryGame()
-sg.showListOfStories()
-sg.chooseStory()
+# sg.showListOfStories()
+# sg.chooseStory()
+sg.chooseDefaultStory()
 
 # start = time.time()
 # sg.generateQuestions()
