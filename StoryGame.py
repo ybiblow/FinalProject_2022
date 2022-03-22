@@ -1,6 +1,6 @@
 import random
-
-from question_generator.questiongenerator import QuestionGenerator, print_qa
+import re  # Import regular expressions
+from question_generator.questiongenerator import QuestionGenerator
 from os import listdir
 
 
@@ -121,7 +121,6 @@ class ProgressFSM:
         self.current_state_index = 1
         self.counter = 0
         self.neg_counter = 0
-        self.current_state_points = 10
         self.current_state = self.q1
         self.stopped = False
 
@@ -132,8 +131,25 @@ class ProgressFSM:
             self.stopped = True
 
     def show_state(self):
-        # print(self.current_state_index)
+        #print(self.current_state_index)
         return self.current_state_index
+
+    def pick_state(self,state):
+        self.counter = 0
+        self.neg_counter = 0
+        if state == 1:
+            self.current_state = self.q1
+            self.current_state_index = 1
+        if state == 2:
+            self.current_state = self.q2
+            self.current_state_index = 2
+        if state == 3:
+            self.current_state = self.q3
+            self.current_state_index = 3
+        if state == 4:
+            self.current_state = self.q4
+            self.current_state_index = 4
+
 
     @prime
     def _create_q1(self):
@@ -213,7 +229,7 @@ class Question:
         print("Question: " + self.question)
         print("Answer: " + str(self.answer))
 
-    def checkAns(self, ans=''):
+    def myCheckAns(self, ans=''):
         if ans == '':
             return False
         return True
@@ -237,7 +253,7 @@ class QuestionMultipleChoice(Question):
         for index, choice in enumerate(self.answerChoices):
             print(str(index + 1) + '. ' + choice['answer'])
 
-    def checkAns(self, ans):
+    def myCheckAns(self, ans):
         return self.answerChoices[int(ans) - 1]['answer'] == self.answer
 
 
@@ -267,15 +283,15 @@ class StoryGame:
         self.correct_ans4 = 0
         self.wrong_ans4 = 0
 
+
     def make_fill_question_dict(self):  ##must be used first
         the_story = self.story
         sentences = the_story.split('.')
         shortest_sentence = min([len(j.split()) for j in sentences])
         x = [random.randint(0, shortest_sentence) for i in range(0, len(sentences))]
-        # print(x)
         self.q_lv1 = {(sentences[i].replace(sentences[i].split()[x[i]], "_")).strip(): sentences[i].split()[x[i]] for i
-                      in range(8)}
-        # print(self.q_lv1)
+                      in range(10)}
+
 
     def generateQuestions(self, q_num, ans_style):
         qa_list = self.qg.generate(
@@ -334,7 +350,7 @@ class StoryGame:
             q = self.get_qlv2()
             q.displayQ()
             ans = input("Your answer: ")
-            if q.checkAns(ans):
+            if q.myCheckAns(ans):
                 self.player_coins += self.re_fsm.current_state_points
                 print("Good Job you gained " + str(self.re_fsm.current_state_points) + " coins")
                 self.pr_fsm.send('y')
@@ -349,7 +365,7 @@ class StoryGame:
         elif self.pr_fsm.show_state() == 3:
             ans = input(self.qe_lv3[self.qe_lv3_ind])
             self.qe_lv3_ind = self.qe_lv3_ind + 1
-            if self.qe_lv3_ind > len(self.qe_lv3):
+            if self.qe_lv3_ind == len(self.qe_lv3):
                 self.qe_lv3_ind = 0
             if ans == '':
                 self.player_coins -= self.re_fsm.current_state_points
@@ -360,12 +376,14 @@ class StoryGame:
             else:
                 self.player_coins += self.re_fsm.current_state_points
                 self.correct_ans3 += 1
-                print("Good Job you gained " + str(self.re_fsm.current_state_points) + "coins")
+                print("Good Job you gained " + str(self.re_fsm.current_state_points) + " coins")
                 self.pr_fsm.send('y')
                 self.re_fsm.send('y')
         else:
             ans = input(self.qe_lv4[self.qe_lv4_ind])
             self.qe_lv4_ind = self.qe_lv4_ind + 1
+            if self.qe_lv4_ind == len(self.qe_lv4):
+                self.qe_lv4_ind = 0
             if ans == '':
                 print("wrong answer")
                 self.player_coins -= self.re_fsm.current_state_points
@@ -381,15 +399,21 @@ class StoryGame:
 
     def showListOfStories(self):
         self.list_of_stories = listdir('dataset')
-        print("List of stories: ")
+        print("pick a Story")
         for story in self.list_of_stories:
             print(story)
+
+
+
 
     def chooseStory(self):
         user_input = input("Enter number: ")
         try:
-            num = int(user_input)
-            print(self.list_of_stories)
+            for story in self.list_of_stories:
+                if str(story).startswith(user_input):
+                    self.storyPath=story.strip()
+                    self.storyPath = 'dataset/'+ str(self.storyPath)
+                    self.story = open(self.storyPath, encoding="utf-8").read()
         except ValueError:
             print("That's not an int!")
 
@@ -398,9 +422,9 @@ class StoryGame:
         self.story = open(self.storyPath, encoding="utf-8").read()
 
     def start_game(self):
-        self.chooseDefaultStory()
+        self.showListOfStories()
+        self.chooseStory()
         open_qe_L = self.generateQuestions(20, 'sentences')
-        print(open_qe_L)
         qmc_lv2 = self.generateQuestions(5, 'multiple_choice')
         self.make_fill_question_dict()
         self.make_que_lv2(qmc_lv2)
@@ -411,22 +435,44 @@ class StoryGame:
     def end_game(self):
         print("you finish the game with " + str(self.player_coins))
         if self.correct_ans1 + self.wrong_ans1 > 0:
-            print("your lvl 1 success was " + str((self.correct_ans1 / (self.correct_ans1 + self.wrong_ans1)) * 100))
+            print("your lvl 1 success was " + str((self.correct_ans1 / (self.correct_ans1 + self.wrong_ans1)) * 100)+ "%")
         if self.correct_ans2 + self.wrong_ans2 > 0:
-            print("your lvl 2 success was " + str((self.correct_ans2 / (self.correct_ans2 + self.wrong_ans2)) * 100))
+            print("your lvl 2 success was " + str((self.correct_ans2 / (self.correct_ans2 + self.wrong_ans2)) * 100)+ "%")
         if self.correct_ans3 + self.wrong_ans3 > 0:
-            print("your lvl 3 success was " + str(((self.correct_ans3) / (self.correct_ans3 + self.wrong_ans3)) * 100))
+            print("your lvl 3 success was " + str(((self.correct_ans3) / (self.correct_ans3 + self.wrong_ans3)) * 100)+ "%")
         if self.correct_ans4 + self.wrong_ans4 > 0:
-            print("your lvl 4 success was " + str((self.correct_ans4 / (self.correct_ans4 + self.wrong_ans4)) * 100))
+            print("your lvl 4 success was " + str((self.correct_ans4 / (self.correct_ans4 + self.wrong_ans4)) * 100) + "%")
+        self.next_game()
+
+    def reset_game(self,lv=1):
+        self.qe_lv2_ind = 0
+        self.qe_lv3_ind = 0
+        self.qe_lv4_ind = 0
+        self.re_fsm = RewardFSM()
+        self.pr_fsm = ProgressFSM()
+        self.player_coins = 0
+        self.correct_ans1 = 0
+        self.wrong_ans1 = 0
+        self.correct_ans2 = 0
+        self.wrong_ans2 = 0
+        self.correct_ans3 = 0
+        self.wrong_ans3 = 0
+        self.correct_ans4 = 0
+        self.wrong_ans4 = 0
+        if lv == 0:
+            self.showListOfStories()
+            self.chooseStory()
+            lv = 1
+        self.pr_fsm.pick_state(lv)
 
 
 
     def next_game(self):
-        if self.correct_ans1 + self.wrong_ans1 > 0:
-            q1_rate = (self.correct_ans1 / (self.correct_ans1 + self.wrong_ans1)) * 100
+        q1_rate = (self.correct_ans1 / (self.correct_ans1 + self.wrong_ans1)) * 100
         if self.correct_ans2 + self.wrong_ans2 > 0:
             q2_rate = (self.correct_ans2 / (self.correct_ans2 + self.wrong_ans2)) * 100
-        else: q2_rate = 0
+        else:
+            q2_rate = 0
         if self.correct_ans3 + self.wrong_ans3 > 0:
             q3_rate = (self.correct_ans3 / (self.correct_ans3 + self.wrong_ans3)) * 100
         else:
@@ -436,8 +482,20 @@ class StoryGame:
         else:
             q4_rate = 0
 
-        # if q4_rate>70:
-        #     print("u can go next game")
+        if q4_rate>50:
+            self.reset_game(0)##chose story only here
+            print("well done you successfully finished the story well\n you can move to the next one")
+        elif q3_rate > 60:
+            self.reset_game(4)
+        elif q2_rate >60:
+            self.reset_game(3)
+        elif q1_rate >70:
+            self.reset_game(2)
+        else:
+            self.reset_game(1)##Same story  here
+
+
+
 
 
 

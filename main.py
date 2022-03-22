@@ -6,19 +6,15 @@ from StoryGame import StoryGame
 
 print(sys.executable)
 print('Good luck!')
-
+sg = StoryGame()
 # sg.showListOfStories()
 # sg.chooseStory()
 
 
-sg = StoryGame()
+
 sg.start_game()
-
-
-print(sg.qe_lv3)
-print(sg.qe_lv4)
-
-
+sg.pr_fsm.send('y')
+sg.pr_fsm.send('y')
 sg.get_quest()
 sg.get_quest()
 sg.get_quest()
@@ -28,13 +24,14 @@ sg.get_quest()
 sg.get_quest()
 sg.get_quest()
 sg.get_quest()
-sg.get_quest()
-sg.get_quest()
-sg.get_quest()
-sg.get_quest()
-sg.get_quest()
+print("----")
+print(sg.pr_fsm.show_state())
 sg.end_game()
-
+print("after end")
+print(sg.pr_fsm.show_state())
+sg.get_quest()
+sg.get_quest()
+sg.get_quest()
 
 
 
