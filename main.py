@@ -12,7 +12,9 @@ print('Good luck!')
 
 
 sg = StoryGame()
-sg.start_game(sg)
+sg.start_game()
+
+
 print(sg.qe_lv3)
 print(sg.qe_lv4)
 
@@ -22,7 +24,21 @@ sg.get_quest()
 sg.get_quest()
 sg.get_quest()
 sg.get_quest()
+sg.get_quest()
+sg.get_quest()
+sg.get_quest()
+sg.get_quest()
+sg.get_quest()
+sg.get_quest()
+sg.get_quest()
+sg.get_quest()
+sg.get_quest()
 sg.end_game()
+
+
+
+
+
 # sg.chooseDefaultStory()
 # sg.make_fill_question_dict()
 # open_qe_L = sg.generateQuestions(20, 'sentences')

@@ -304,6 +304,8 @@ class StoryGame:
 
     def get_qlv2(self):
         self.qe_lv2_ind += 1
+        if self.qe_lv2_ind == len(self.q_lv2):
+            self.qe_lv2_ind = 0
         return self.q_lv2[self.qe_lv2_ind - 1]
 
     def make_que_lv3(self, open_qe_list):
@@ -395,15 +397,15 @@ class StoryGame:
         self.storyPath = 'dataset/1. A jataka tale.txt'
         self.story = open(self.storyPath, encoding="utf-8").read()
 
-    def start_game(self, sg):
-        sg.chooseDefaultStory()
-        open_qe_L = sg.generateQuestions(20, 'sentences')
+    def start_game(self):
+        self.chooseDefaultStory()
+        open_qe_L = self.generateQuestions(20, 'sentences')
         print(open_qe_L)
-        qmc_lv2 = sg.generateQuestions(5, 'multiple_choice')
-        sg.make_fill_question_dict()
-        sg.make_que_lv2(qmc_lv2)
-        sg.make_que_lv3(open_qe_L)
-        sg.make_que_lv4(open_qe_L)
+        qmc_lv2 = self.generateQuestions(5, 'multiple_choice')
+        self.make_fill_question_dict()
+        self.make_que_lv2(qmc_lv2)
+        self.make_que_lv3(open_qe_L)
+        self.make_que_lv4(open_qe_L)
 
 
     def end_game(self):
@@ -434,8 +436,8 @@ class StoryGame:
         else:
             q4_rate = 0
 
-        if q4_rate>70:
-            print("u can go next game")
+        # if q4_rate>70:
+        #     print("u can go next game")
 
 
 
