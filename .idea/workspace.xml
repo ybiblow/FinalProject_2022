@@ -2,12 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="dd539b0d-6b88-466c-8f58-a9c9777e9c27" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/RewardFSM.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/StoryGame.py" beforeDir="false" afterPath="$PROJECT_DIR$/StoryGame.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataset/1. A jataka tale.txt" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/1. A jataka tale.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/question_generation_example.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/question_generation_example.ipynb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,7 +34,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../PycharmProjects/pythonProject3" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.appearance" />
   </component>
   <component name="RunManager" selected="Python.main">
     <configuration name="StoryGame" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
