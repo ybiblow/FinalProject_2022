@@ -1,6 +1,5 @@
 import sys
 from os import listdir
-import time
 import RewardFSM
 from StoryGame import StoryGame
 
@@ -11,27 +10,27 @@ sg = StoryGame()
 # sg.chooseStory()
 
 
-
 sg.start_game()
-sg.pr_fsm.send('y')
-sg.pr_fsm.send('y')
-sg.get_quest()
-sg.get_quest()
-sg.get_quest()
-sg.get_quest()
-sg.get_quest()
-sg.get_quest()
-sg.get_quest()
-sg.get_quest()
-sg.get_quest()
-print("----")
+a =sg.get_quest()
+a =sg.get_quest()
+a =sg.get_quest()
+a =sg.get_quest()
+a =sg.get_quest()
+a =sg.get_quest()
+a =sg.get_quest()
+a =sg.get_quest()
+a =sg.get_quest()
+a =sg.get_quest()
+a =sg.get_quest()
+a =sg.get_quest()
+
 print(sg.pr_fsm.show_state())
 sg.end_game()
 print("after end")
 print(sg.pr_fsm.show_state())
-sg.get_quest()
-sg.get_quest()
-sg.get_quest()
+a =sg.get_quest()
+a =sg.get_quest()
+a =sg.get_quest()
 
 
 
