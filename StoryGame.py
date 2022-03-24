@@ -257,6 +257,7 @@ class QuestionMultipleChoice(Question):
 
 class StoryGame:
     def __init__(self):
+        self.exit_game = 1
         self.q_lv1 = None
         self.q_lv2 = list()
         self.qe_lv3 = None
@@ -282,15 +283,19 @@ class StoryGame:
         self.correct_ans4 = 0
         self.wrong_ans4 = 0
 
-    def smake_fill_question_dict(self):
+    def make_fill_question_dict(self):
         the_story = self.story
         # sentences = the_story.split(' ')
         sentences = the_story.strip()
         sentences = sentences.split('.')
         x = [random.randint(0, 4) for i in range(0, len(sentences))]
         print(x)
-        self.q_lv1 = {(sentences[i].replace(sentences[i].split()[x[i]], "____")).strip(): sentences[i].split()[x[i]] for i
-                      in range(10) if x[i] <len(sentences[i])}
+        print(sentences)
+        for se in sentences:
+            print(se)
+            for y in se.split():
+                print(y)
+        self.q_lv1 = {(sentences[i].replace(sentences[i].split()[x[i]], "___")).strip() : sentences[i].split()[x[i]] for i in range(10) if x[i] <len(sentences[i].split())}
         print(self.q_lv1)
 
     def generateQuestions(self, q_num, ans_style):
@@ -418,7 +423,7 @@ class StoryGame:
 
     def showListOfStories(self):
         self.list_of_stories = listdir('dataset')
-        print("pick a Story")
+        print("pick a Story or -1 to Exit")
         for story in self.list_of_stories:
             print(story)
 
@@ -426,15 +431,18 @@ class StoryGame:
         user_input = input("Enter number: ")
         if len(user_input) == 1:
             user_input+= "."
-            print(user_input)
-        try:
-            for story in self.list_of_stories:
-                if str(story).startswith(user_input):
-                    self.storyPath = story.strip()
-                    self.storyPath = 'dataset/' + str(self.storyPath)
-                    self.story = open(self.storyPath, encoding="utf-8").read()
-        except ValueError:
-            print("That's not an int!")
+        if user_input != '-1':
+            try:
+                for story in self.list_of_stories:
+                    if str(story).startswith(user_input):
+                        self.storyPath = story.strip()
+                        self.storyPath = 'dataset/' + str(self.storyPath)
+                        self.story = open(self.storyPath, encoding="utf-8").read()
+            except ValueError:
+                print("That's not an int!")
+
+        else:
+            self.exit_game = 0
 
     def chooseDefaultStory(self):
         self.storyPath = 'dataset/1. A jataka tale.txt'
@@ -443,13 +451,18 @@ class StoryGame:
     def start_game(self):
         self.showListOfStories()
         self.chooseStory()
-        open_qe_L = self.generateQuestions(20, 'sentences')
-        # print(open_qe_L)
-        qmc_lv2 = self.generateQuestions(5, 'multiple_choice')
-        self.make_fill_question_dict()
-        self.make_que_lv2(qmc_lv2)
-        self.make_que_lv3(open_qe_L)
-        self.make_que_lv4(open_qe_L)
+        if  self.exit_game == 1:
+            open_qe_L = self.generateQuestions(20, 'sentences')
+            # print(open_qe_L)
+            qmc_lv2 = self.generateQuestions(5, 'multiple_choice')
+            self.make_fill_question_dict()
+            self.make_que_lv2(qmc_lv2)
+            self.make_que_lv3(open_qe_L)
+            self.make_que_lv4(open_qe_L)
+        else:
+            print("tnx for playing cya next time")
+
+
 
     def end_game(self):
         self.save_to_file()
@@ -525,3 +538,4 @@ class StoryGame:
 
     def save_to_file(self,new_story=1):
         pass
+

@@ -11,7 +11,7 @@ sg = StoryGame()
 
 
 sg.start_game()
-a =sg.get_quest()
+sg.get_quest()
 a =sg.get_quest()
 a =sg.get_quest()
 a =sg.get_quest()
