@@ -282,6 +282,7 @@ class StoryGame:
         self.wrong_ans3 = 0
         self.correct_ans4 = 0
         self.wrong_ans4 = 0
+        open("output.txt", "w")
 
     def make_fill_question_dict(self):
         the_story = self.story
@@ -295,7 +296,8 @@ class StoryGame:
             print(se)
             for y in se.split():
                 print(y)
-        self.q_lv1 = {(sentences[i].replace(sentences[i].split()[x[i]], "___", 1)).strip() : sentences[i].split()[x[i]] for i in range(10) if x[i] <len(sentences[i].split())}
+        self.q_lv1 = {(sentences[i].replace(sentences[i].split()[x[i]], "___", 1)).strip(): sentences[i].split()[x[i]]
+                      for i in range(10) if x[i] < len(sentences[i].split())}
         print(self.q_lv1)
 
     def generateQuestions(self, q_num, ans_style):
@@ -342,7 +344,6 @@ class StoryGame:
             self.player_coins += 25
             self.old_pr_state = self.pr_fsm.show_state()
             print("you went up a lvl and eren extra 20 points")
-
 
     def get_quest(self):
         if self.pr_fsm.show_state() == 1:
@@ -430,7 +431,7 @@ class StoryGame:
     def chooseStory(self):
         user_input = input("Enter number: ")
         if len(user_input) == 1:
-            user_input+= "."
+            user_input += "."
         if user_input != '-1':
             try:
                 for story in self.list_of_stories:
@@ -451,7 +452,7 @@ class StoryGame:
     def start_game(self):
         self.showListOfStories()
         self.chooseStory()
-        if  self.exit_game == 1:
+        if self.exit_game == 1:
             open_qe_L = self.generateQuestions(20, 'sentences')
             # print(open_qe_L)
             qmc_lv2 = self.generateQuestions(5, 'multiple_choice')
@@ -461,8 +462,6 @@ class StoryGame:
             self.make_que_lv4(open_qe_L)
         else:
             print("tnx for playing cya next time")
-
-
 
     def end_game(self):
         self.save_to_file()
@@ -523,7 +522,7 @@ class StoryGame:
 
         if q4_rate > 50:
             print("well done you successfully finished the story well\nyou can move to the next one")
-            self.reset_game(0)  #chose story only here
+            self.reset_game(0)  # chose story only here
         elif q3_rate > 60:
             print("you  need to work on your open question skills,lets try agine")
             self.reset_game(4)
@@ -536,6 +535,13 @@ class StoryGame:
         else:
             self.reset_game(1)  # Same story  here
 
-    def save_to_file(self,new_story=1):
-        pass
-
+    def save_to_file(self, new_story=1):
+        ca1, wa1 = str(self.correct_ans1) + "\n", str(self.wrong_ans1) + "\n"
+        ca2, wa2 = str(self.correct_ans2) + "\n", str(self.wrong_ans2) + "\n"
+        ca3, wa3 = str(self.correct_ans3) + "\n", str(self.wrong_ans3) + "\n"
+        ca4, wa4 = str(self.correct_ans4) + "\n", str(self.wrong_ans4) + "\n"
+        print("Saving to file...")
+        output = open("output.txt", "a")
+        output.write(ca1 + wa1 + ca2 + wa2 + ca3 + wa3 + ca4 + wa4)
+        output.close()
+        print("Saved to file!")
