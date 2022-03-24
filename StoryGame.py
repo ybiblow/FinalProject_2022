@@ -295,7 +295,7 @@ class StoryGame:
             print(se)
             for y in se.split():
                 print(y)
-        self.q_lv1 = {(sentences[i].replace(sentences[i].split()[x[i]], "___")).strip() : sentences[i].split()[x[i]] for i in range(10) if x[i] <len(sentences[i].split())}
+        self.q_lv1 = {(sentences[i].replace(sentences[i].split()[x[i]], "___", 1)).strip() : sentences[i].split()[x[i]] for i in range(10) if x[i] <len(sentences[i].split())}
         print(self.q_lv1)
 
     def generateQuestions(self, q_num, ans_style):
