@@ -53,7 +53,8 @@ def tap(x, y):
         hide[mark] = False
         state['mark'] = None
         if num_of_pairs_found % 3 == 0:
-            print("Generate Question")
+            # print("Generate Question")
+            sg.get_quest()
         if num_of_pairs_found == 32:
             print("Finished the game!")
             turtle.bye()
