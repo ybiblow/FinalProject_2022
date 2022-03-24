@@ -284,7 +284,6 @@ class StoryGame:
 
     def smake_fill_question_dict(self):
         the_story = self.story
-
         # sentences = the_story.split(' ')
         sentences = the_story.strip()
         sentences = sentences.split('.')
@@ -453,6 +452,7 @@ class StoryGame:
         self.make_que_lv4(open_qe_L)
 
     def end_game(self):
+        self.save_to_file()
         print("\nyou finish the game with " + str(self.player_coins) + " Points!")
         if self.correct_ans1 + self.wrong_ans1 > 0:
             print("your lvl 1 success was " + str(
@@ -522,3 +522,6 @@ class StoryGame:
             self.reset_game(2)
         else:
             self.reset_game(1)  # Same story  here
+
+    def save_to_file(self,new_story=1):
+        pass
