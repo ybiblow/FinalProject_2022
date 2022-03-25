@@ -45,23 +45,23 @@ print('Good luck!')
 
 
 ##############################
-# # Jack's Testing:
-# story = open("dataset/1. A jataka tale.txt", "r", encoding="utf-8").read()
-# sentences = story.split('.')
-# for idx, sentence in enumerate(sentences):
-#     sentences[idx] = sentence.replace('\n', '')
-#     if len(sentences[idx]) < 10:
-#         sentences.pop(idx)
-# print(sentences)
-# q_list = list()
-# for sentence in sentences:
-#     words = sentence.split()
-#     num_of_words = len(words)
-#     rand = random.randint(num_of_words)
-#     answer = words[rand]
-#     words[rand] = '___'
-#     question = " ".join(words)
-#     q = Question(question=question, answer=answer)
-#     q_list.append(q)
-# for q in q_list:
-#     q.printQA()
+# Jack's Testing:
+story = open("dataset/1. A jataka tale.txt", "r", encoding="utf-8").read()
+sentences = story.split('.')
+for idx, sentence in enumerate(sentences):
+    sentences[idx] = sentence.replace('\n', '')
+    if len(sentences[idx]) < 10:
+        sentences.pop(idx)
+print(sentences)
+q_list = list()
+for sentence in sentences:
+    words = sentence.split()
+    num_of_words = len(words)
+    rand = random.randint(num_of_words)
+    answer = words[rand]
+    words[rand] = '___'
+    question = " ".join(words)
+    q = Question(question=question, answer=answer)
+    q_list.append(q)
+for q in q_list:
+    q.printQA()

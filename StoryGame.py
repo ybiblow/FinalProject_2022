@@ -457,6 +457,7 @@ class StoryGame:
             # print(open_qe_L)
             qmc_lv2 = self.generateQuestions(5, 'multiple_choice')
             self.make_fill_question_dict()
+            self.make_fill_question_dict1()
             self.make_que_lv2(qmc_lv2)
             self.make_que_lv3(open_qe_L)
             self.make_que_lv4(open_qe_L)
@@ -545,3 +546,25 @@ class StoryGame:
         output.write(ca1 + wa1 + ca2 + wa2 + ca3 + wa3 + ca4 + wa4)
         output.close()
         print("Saved to file!")
+
+    def make_fill_question_dict1(self):
+        story = self.story
+        sentences = story.split('.')
+        for idx, sentence in enumerate(sentences):
+            sentences[idx] = sentence.replace('\n', '')
+            if len(sentences[idx]) < 10:
+                sentences.pop(idx)
+        print(sentences)
+        self.q_lvl1 = list()
+        for sentence in sentences:
+            words = sentence.split()
+            num_of_words = len(words)
+            rand = random.randint(num_of_words)
+            answer = words[rand]
+            words[rand] = '___'
+            question = " ".join(words)
+            q = Question(question=question, answer=answer)
+            self.q_lvl1.append(q)
+        for q in self.q_lvl1:
+            q.printQA()
+
