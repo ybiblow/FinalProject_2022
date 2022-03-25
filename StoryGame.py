@@ -1,7 +1,7 @@
 import random
 from question_generator.questiongenerator import QuestionGenerator
 from os import listdir
-
+from numpy import random
 
 def prime(fn):
     def wrapper(*args, **kwargs):
@@ -227,10 +227,13 @@ class Question:
         print("Question: " + self.question)
         print("Answer: " + str(self.answer))
 
+    def printQuestion(self):
+        print(self.question)
+
     def myCheckAns(self, ans=''):
-        if ans == '':
-            return False
-        return True
+        if self.answer == ans:
+            return True
+        return False
 
 
 class QuestionMultipleChoice(Question):
@@ -262,6 +265,7 @@ class StoryGame:
         self.q_lv2 = list()
         self.qe_lv3 = None
         self.qe_lv4 = None
+        self.qe_lv1_ind = 0
         self.qe_lv2_ind = 0
         self.qe_lv3_ind = 0
         self.qe_lv4_ind = 0
@@ -320,6 +324,12 @@ class StoryGame:
         ans = input("fill the missing word: ")
         return ans == self.q_lv1[current_q]
 
+    def ask_fill_question1(self):
+        q = self.q_lvl1[self.qe_lv1_ind]
+        q.printQuestion()
+        ans = input("Fill the missing word: ")
+        return q.myCheckAns(ans=ans)
+
     def make_que_lv2(self, qmc_lv2):
         for question in qmc_lv2:
             q = QuestionMultipleChoice(question=question['question'], answers=question['answer'])
@@ -347,7 +357,8 @@ class StoryGame:
 
     def get_quest(self):
         if self.pr_fsm.show_state() == 1:
-            if self.ask_fill_question():
+            if self.ask_fill_question1():
+                self.qe_lv1_ind += 1
                 self.correct_ans1 += 1
                 self.player_coins += self.re_fsm.current_state_points
                 print("\nGood Job you gained " + str(self.re_fsm.current_state_points) + " Points")
@@ -567,4 +578,3 @@ class StoryGame:
             self.q_lvl1.append(q)
         for q in self.q_lvl1:
             q.printQA()
-
