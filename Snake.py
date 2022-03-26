@@ -83,7 +83,7 @@ def food_collision():
         food.goto(food_position)
         print("i just ate")
         count +=1
-        if count == 3:
+        if count == 1:
             sg.get_quest()
             count = 0
         return True

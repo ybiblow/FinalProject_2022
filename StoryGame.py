@@ -262,6 +262,7 @@ class StoryGame:
     def __init__(self):
         self.exit_game = 1
         self.q_lv1 = None
+        self.q_lvl1 = list()
         self.q_lv2 = list()
         self.qe_lv3 = None
         self.qe_lv4 = None
@@ -316,15 +317,15 @@ class StoryGame:
         for key in self.q_lv1:
             yield key
 
-    def ask_fill_question(self):
-        if self.current_q_lv1 is None:
-            self.current_q_lv1 = self.get_fill_question()
-        current_q = self.current_q_lv1.__next__()
-        print(current_q)
-        ans = input("fill the missing word: ")
-        return ans == self.q_lv1[current_q]
+    # def ask_fill_question(self):
+    #     if self.current_q_lv1 is None:
+    #         self.current_q_lv1 = self.get_fill_question()
+    #     current_q = self.current_q_lv1.__next__()
+    #     print(current_q)
+    #     ans = input("fill the missing word: ")
+    #     return ans == self.q_lv1[current_q]
 
-    def ask_fill_question1(self):
+    def ask_fill_question(self):
         q = self.q_lvl1[self.qe_lv1_ind]
         q.printQuestion()
         ans = input("Fill the missing word: ")
@@ -357,7 +358,7 @@ class StoryGame:
 
     def get_quest(self):
         if self.pr_fsm.show_state() == 1:
-            if self.ask_fill_question1():
+            if self.ask_fill_question():
                 self.qe_lv1_ind += 1
                 self.correct_ans1 += 1
                 self.player_coins += self.re_fsm.current_state_points
@@ -468,7 +469,7 @@ class StoryGame:
             # print(open_qe_L)
             qmc_lv2 = self.generateQuestions(5, 'multiple_choice')
             self.make_fill_question_dict()
-            self.make_fill_question_dict1()
+            self.make_fill_question()
             self.make_que_lv2(qmc_lv2)
             self.make_que_lv3(open_qe_L)
             self.make_que_lv4(open_qe_L)
@@ -493,6 +494,9 @@ class StoryGame:
         self.next_game()
 
     def reset_game(self, lv=1):
+        self.q_lvl1 = list()
+        self.q_lv2 = list()
+        self.qe_lv1_ind = 0
         self.qe_lv2_ind = 0
         self.qe_lv3_ind = 0
         self.qe_lv4_ind = 0
@@ -509,9 +513,8 @@ class StoryGame:
         self.correct_ans4 = 0
         self.wrong_ans4 = 0
         if lv == 0:
-            self.showListOfStories()
-            self.chooseStory()
             lv = 1
+            self.start_game()
         self.pr_fsm.pick_state(lv)
 
     def next_game(self):
@@ -558,7 +561,7 @@ class StoryGame:
         output.close()
         print("Saved to file!")
 
-    def make_fill_question_dict1(self):
+    def make_fill_question(self):
         story = self.story
         sentences = story.split('.')
         for idx, sentence in enumerate(sentences):
@@ -566,7 +569,6 @@ class StoryGame:
             if len(sentences[idx]) < 10:
                 sentences.pop(idx)
         print(sentences)
-        self.q_lvl1 = list()
         for sentence in sentences:
             words = sentence.split()
             num_of_words = len(words)
