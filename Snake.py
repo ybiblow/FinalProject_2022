@@ -81,9 +81,9 @@ def food_collision():
     if get_distance(snake[-1], food_position) < 20:
         food_position = get_random_food_position()
         food.goto(food_position)
-        print("i just ate")
+        # print("i just ate")
         count +=1
-        if count == 1:
+        if count == 3:
             sg.get_quest()
             count = 0
         return True

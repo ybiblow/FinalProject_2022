@@ -354,7 +354,7 @@ class StoryGame:
         if self.old_pr_state != self.pr_fsm.show_state():
             self.player_coins += 25
             self.old_pr_state = self.pr_fsm.show_state()
-            print("you went up a lvl and eren extra 20 points")
+            print("You advanced to the next level and earned extra 20 points")
 
     def get_quest(self):
         if self.pr_fsm.show_state() == 1:
@@ -372,7 +372,7 @@ class StoryGame:
                 self.wrong_ans1 += 1
                 self.pr_fsm.send('n')
                 self.re_fsm.send('n')
-                print("that's not it :(\ngive it another try\n")
+                print("That's not it :(\ngive it another try\n")
                 return False
         elif self.pr_fsm.show_state() == 2:
             q = self.get_qlv2()
@@ -391,7 +391,7 @@ class StoryGame:
                 self.wrong_ans2 += 1
                 self.pr_fsm.send('n')
                 self.re_fsm.send('n')
-                print("its incorrect :(\nbut i am sure Your perseverance will help you succeed\n")
+                print("It's incorrect :(\nbut i am sure Your perseverance will help you succeed\n")
                 return False
         elif self.pr_fsm.show_state() == 3:
             ans = input(self.qe_lv3[self.qe_lv3_ind])
@@ -403,7 +403,7 @@ class StoryGame:
                 self.wrong_ans3 += 1
                 self.pr_fsm.send('n')
                 self.re_fsm.send('n')
-                print("its incorrect :(\nMistakes are proof that you are trying so keep going\n")
+                print("That's incorrect :(\nMistakes are proof that you are trying so keep going\n")
                 return False
             else:
                 self.player_coins += self.re_fsm.current_state_points
@@ -419,14 +419,14 @@ class StoryGame:
             if self.qe_lv4_ind == len(self.qe_lv4):
                 self.qe_lv4_ind = 0
             if ans == '':
-                print("its incorrect :(\nTrust your instincts I sure you can do it\n")
+                print("That's incorrect :(\nTrust your instincts I sure you can do it\n")
                 self.player_coins -= self.re_fsm.current_state_points
                 self.wrong_ans4 += 1
                 self.pr_fsm.send('n')
                 self.re_fsm.send('n')
                 return False
             else:
-                print("\n WoW That right! gained " + str(self.re_fsm.current_state_points) + " Points")
+                print("\n Wow That's right! gained " + str(self.re_fsm.current_state_points) + " Points")
                 self.player_coins += self.re_fsm.current_state_points
                 self.correct_ans4 += 1
                 self.pr_fsm.send('y')
@@ -436,7 +436,7 @@ class StoryGame:
 
     def showListOfStories(self):
         self.list_of_stories = listdir('dataset')
-        print("pick a Story or -1 to Exit")
+        print("Pick a Story or -1 to Exit")
         for story in self.list_of_stories:
             print(story)
 
@@ -468,28 +468,28 @@ class StoryGame:
             open_qe_L = self.generateQuestions(20, 'sentences')
             # print(open_qe_L)
             qmc_lv2 = self.generateQuestions(5, 'multiple_choice')
-            self.make_fill_question_dict()
+            # self.make_fill_question_dict()
             self.make_fill_question()
             self.make_que_lv2(qmc_lv2)
             self.make_que_lv3(open_qe_L)
             self.make_que_lv4(open_qe_L)
         else:
-            print("tnx for playing cya next time")
+            print("Thanks for playing see you next time!")
 
     def end_game(self):
         self.save_to_file()
-        print("\nyou finish the game with " + str(self.player_coins) + " Points!")
+        print("\nYou finish the game with " + str(self.player_coins) + " Points!")
         if self.correct_ans1 + self.wrong_ans1 > 0:
-            print("your lvl 1 success was " + str(
+            print("Your lvl 1 success was " + str(
                 (self.correct_ans1 / (self.correct_ans1 + self.wrong_ans1)) * 100) + "%")
         if self.correct_ans2 + self.wrong_ans2 > 0:
-            print("your lvl 2 success was " + str(
+            print("Your lvl 2 success was " + str(
                 (self.correct_ans2 / (self.correct_ans2 + self.wrong_ans2)) * 100) + "%")
         if self.correct_ans3 + self.wrong_ans3 > 0:
-            print("your lvl 3 success was " + str(
+            print("Your lvl 3 success was " + str(
                 (self.correct_ans3 / (self.correct_ans3 + self.wrong_ans3)) * 100) + "%")
         if self.correct_ans4 + self.wrong_ans4 > 0:
-            print("your lvl 4 success was " + str(
+            print("Your lvl 4 success was " + str(
                 (self.correct_ans4 / (self.correct_ans4 + self.wrong_ans4)) * 100) + "%")
         self.next_game()
 
@@ -536,16 +536,16 @@ class StoryGame:
             q4_rate = 0
 
         if q4_rate > 50:
-            print("well done you successfully finished the story well\nyou can move to the next one")
+            print("Well done you successfully finished the story well\nyou can move to the next one")
             self.reset_game(0)  # chose story only here
         elif q3_rate > 60:
-            print("you  need to work on your open question skills,lets try agine")
+            print("You  need to work on your open question skills,lets try agine")
             self.reset_game(4)
         elif q2_rate > 60:
-            print("you  need to work on your Basic Open question skills,lets try agine")
+            print("You  need to work on your Basic Open question skills,lets try agine")
             self.reset_game(3)
         elif q1_rate > 70:
-            print("you  need to work on your multiple choice question skills,lets try agine")
+            print("You  need to work on your multiple choice question skills,lets try agine")
             self.reset_game(2)
         else:
             self.reset_game(1)  # Same story  here
@@ -568,7 +568,7 @@ class StoryGame:
             sentences[idx] = sentence.replace('\n', '')
             if len(sentences[idx]) < 10:
                 sentences.pop(idx)
-        print(sentences)
+        # print(sentences)
         for sentence in sentences:
             words = sentence.split()
             num_of_words = len(words)
