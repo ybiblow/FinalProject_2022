@@ -1,7 +1,5 @@
 import re
 import sys
-from os import listdir
-import RewardFSM
 from StoryGame import StoryGame, Question
 from numpy import random
 

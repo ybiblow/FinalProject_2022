@@ -170,6 +170,7 @@ class ProgressFSM:
             char = yield
             if char == 'y':
                 self.counter = self.counter + 1
+                self.neg_counter = 0
                 if self.counter > 1:
                     self.counter = 0
                     self.neg_counter = 0
@@ -192,6 +193,7 @@ class ProgressFSM:
             char = yield
             if char == 'y':
                 self.counter = self.counter + 1
+                self.neg_counter = 0
                 if self.counter == 4:
                     self.counter = 0
                     self.neg_counter = 0
@@ -289,21 +291,6 @@ class StoryGame:
         self.wrong_ans4 = 0
         open("output.txt", "w")
 
-    def make_fill_question_dict(self):
-        the_story = self.story
-        # sentences = the_story.split(' ')
-        sentences = the_story.strip()
-        sentences = sentences.split('.')
-        x = [random.randint(0, 4) for i in range(0, len(sentences))]
-        print(x)
-        print(sentences)
-        for se in sentences:
-            print(se)
-            for y in se.split():
-                print(y)
-        self.q_lv1 = {(sentences[i].replace(sentences[i].split()[x[i]], "___", 1)).strip(): sentences[i].split()[x[i]]
-                      for i in range(10) if x[i] < len(sentences[i].split())}
-        print(self.q_lv1)
 
     def generateQuestions(self, q_num, ans_style):
         qa_list = self.qg.generate(
@@ -317,13 +304,6 @@ class StoryGame:
         for key in self.q_lv1:
             yield key
 
-    # def ask_fill_question(self):
-    #     if self.current_q_lv1 is None:
-    #         self.current_q_lv1 = self.get_fill_question()
-    #     current_q = self.current_q_lv1.__next__()
-    #     print(current_q)
-    #     ans = input("fill the missing word: ")
-    #     return ans == self.q_lv1[current_q]
 
     def ask_fill_question(self):
         q = self.q_lvl1[self.qe_lv1_ind]
@@ -380,7 +360,7 @@ class StoryGame:
             ans = input("Your answer: ")
             if q.myCheckAns(ans):
                 self.player_coins += self.re_fsm.current_state_points
-                print("\nGood Job you gained " + str(self.re_fsm.current_state_points) + " Points")
+                print("\nGood Job you gained " + str(self.re_fsm.current_state_points) + " Points\n")
                 self.pr_fsm.send('y')
                 self.re_fsm.send('y')
                 self.check_bonus()
@@ -408,7 +388,7 @@ class StoryGame:
             else:
                 self.player_coins += self.re_fsm.current_state_points
                 self.correct_ans3 += 1
-                print("\nWell done you gained " + str(self.re_fsm.current_state_points) + " Points")
+                print("\nWell done you gained " + str(self.re_fsm.current_state_points) + " Points\n")
                 self.pr_fsm.send('y')
                 self.re_fsm.send('y')
                 self.check_bonus()
@@ -426,7 +406,7 @@ class StoryGame:
                 self.re_fsm.send('n')
                 return False
             else:
-                print("\n Wow That's right! gained " + str(self.re_fsm.current_state_points) + " Points")
+                print("\n Wow That's right! gained " + str(self.re_fsm.current_state_points) + " Points\n")
                 self.player_coins += self.re_fsm.current_state_points
                 self.correct_ans4 += 1
                 self.pr_fsm.send('y')
@@ -451,6 +431,7 @@ class StoryGame:
                         self.storyPath = story.strip()
                         self.storyPath = 'dataset/' + str(self.storyPath)
                         self.story = open(self.storyPath, encoding="utf-8").read()
+                        print(self.story)
             except ValueError:
                 print("That's not an int!")
 
@@ -466,9 +447,7 @@ class StoryGame:
         self.chooseStory()
         if self.exit_game == 1:
             open_qe_L = self.generateQuestions(20, 'sentences')
-            # print(open_qe_L)
             qmc_lv2 = self.generateQuestions(5, 'multiple_choice')
-            # self.make_fill_question_dict()
             self.make_fill_question()
             self.make_que_lv2(qmc_lv2)
             self.make_que_lv3(open_qe_L)
@@ -493,9 +472,7 @@ class StoryGame:
                 (self.correct_ans4 / (self.correct_ans4 + self.wrong_ans4)) * 100) + "%")
         self.next_game()
 
-    def reset_game(self, lv=1):
-        self.q_lvl1 = list()
-        self.q_lv2 = list()
+    def reset_game(self, Progress_state=1):
         self.qe_lv1_ind = 0
         self.qe_lv2_ind = 0
         self.qe_lv3_ind = 0
@@ -512,10 +489,12 @@ class StoryGame:
         self.wrong_ans3 = 0
         self.correct_ans4 = 0
         self.wrong_ans4 = 0
-        if lv == 0:
-            lv = 1
+        if Progress_state == 0:
+            Progress_state = 1
+            self.q_lvl1 = list()
+            self.q_lv2 = list()
             self.start_game()
-        self.pr_fsm.pick_state(lv)
+        self.pr_fsm.pick_state(Progress_state)
 
     def next_game(self):
         if self.correct_ans1 + self.wrong_ans1 > 0:
@@ -537,7 +516,7 @@ class StoryGame:
 
         if q4_rate > 50:
             print("Well done you successfully finished the story well\nyou can move to the next one")
-            self.reset_game(0)  # chose story only here
+            self.reset_game(0)  # chose new story only here
         elif q3_rate > 60:
             print("You  need to work on your open question skills,lets try agine")
             self.reset_game(4)
@@ -548,18 +527,17 @@ class StoryGame:
             print("You  need to work on your multiple choice question skills,lets try agine")
             self.reset_game(2)
         else:
-            self.reset_game(1)  # Same story  here
+            self.reset_game(1)
 
     def save_to_file(self, new_story=1):
         ca1, wa1 = str(self.correct_ans1) + "\n", str(self.wrong_ans1) + "\n"
         ca2, wa2 = str(self.correct_ans2) + "\n", str(self.wrong_ans2) + "\n"
         ca3, wa3 = str(self.correct_ans3) + "\n", str(self.wrong_ans3) + "\n"
         ca4, wa4 = str(self.correct_ans4) + "\n", str(self.wrong_ans4) + "\n"
-        print("Saving to file...")
         output = open("output.txt", "a")
         output.write(ca1 + wa1 + ca2 + wa2 + ca3 + wa3 + ca4 + wa4)
         output.close()
-        print("Saved to file!")
+        print("Saved to log!")
 
     def make_fill_question(self):
         story = self.story
