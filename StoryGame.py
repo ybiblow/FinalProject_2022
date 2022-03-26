@@ -578,5 +578,5 @@ class StoryGame:
             question = " ".join(words)
             q = Question(question=question, answer=answer)
             self.q_lvl1.append(q)
-        for q in self.q_lvl1:
-            q.printQA()
+        # for q in self.q_lvl1:
+        #     q.printQA()
